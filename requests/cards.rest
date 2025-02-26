@@ -1,0 +1,38 @@
+GET http://localhost:3003/api/cards
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmU3NzI4ZGFiZGQyOTA2MzVlNTdhMCIsImlhdCI6MTc0MDUzOTI5NCwiZXhwIjoxNzQwNTQyODk0fQ.uM3-BQKuJrHEZM8A3Ug9ydSuqLRixLY7f9JyTKzsC0U
+
+###
+
+GET http://localhost:3003/api/cards/67be86589845b7b6a36850cb
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmU3NzI4ZGFiZGQyOTA2MzVlNTdhMCIsImlhdCI6MTc0MDUzOTI5NCwiZXhwIjoxNzQwNTQyODk0fQ.uM3-BQKuJrHEZM8A3Ug9ydSuqLRixLY7f9JyTKzsC0U
+
+###
+
+POST http://localhost:3003/api/cards
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmU3NzI4ZGFiZGQyOTA2MzVlNTdhMCIsImlhdCI6MTc0MDUzOTI5NCwiZXhwIjoxNzQwNTQyODk0fQ.uM3-BQKuJrHEZM8A3Ug9ydSuqLRixLY7f9JyTKzsC0U
+
+{
+  "word": "Dog",
+  "translation": "Собака",
+  "usage": "This is my dog, Rex"
+}
+
+###
+
+DELETE http://localhost:3003/api/cards/67be86589845b7b6a36850cb
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmU3NzI4ZGFiZGQyOTA2MzVlNTdhMCIsImlhdCI6MTc0MDUzOTI5NCwiZXhwIjoxNzQwNTQyODk0fQ.uM3-BQKuJrHEZM8A3Ug9ydSuqLRixLY7f9JyTKzsC0U
+
+###
+
+PUT http://localhost:3003/api/cards/67be86d49845b7b6a36850d7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmU3NzI4ZGFiZGQyOTA2MzVlNTdhMCIsImlhdCI6MTc0MDUzOTI5NCwiZXhwIjoxNzQwNTQyODk0fQ.uM3-BQKuJrHEZM8A3Ug9ydSuqLRixLY7f9JyTKzsC0U
+
+{
+  "word": "Doggy",
+  "translation": "Собака",
+  "usage": "This is my doggy, Rex"
+}
+
+###
