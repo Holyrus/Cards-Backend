@@ -18,8 +18,7 @@ usersRouter.post('/', async (request, response) => {
 
 usersRouter.get('/', async (request, response) => {
   const users = await User
-    .find({})
-    .populate('cards', { word: 1, translation: 1, usage: 1 })
+    .find({}).populate('decks', { learnLang: 1, natLang: 1 })
   response.json(users)
 })
 

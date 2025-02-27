@@ -1,0 +1,28 @@
+POST http://localhost:3003/api/decks
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmZkNzEzZTA4NTVjNGYwMDgzODBiOSIsImlhdCI6MTc0MDYyNTY5MSwiZXhwIjoxNzQwNjI5MjkxfQ.a3IMN-69OML3kP5nA7e193_sipuVwuA3E6LxdBMoZu4
+
+{
+  "learnLang": "Ukrainian",
+  "natLang": "English"
+}
+
+###
+
+GET http://localhost:3003/api/decks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmZkNzEzZTA4NTVjNGYwMDgzODBiOSIsImlhdCI6MTc0MDYyNTY5MSwiZXhwIjoxNzQwNjI5MjkxfQ.a3IMN-69OML3kP5nA7e193_sipuVwuA3E6LxdBMoZu4
+
+###
+
+DELETE http://localhost:3003/api/decks/67bfdb07b71f33edd045ed67
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmZkNzEzZTA4NTVjNGYwMDgzODBiOSIsImlhdCI6MTc0MDYyNTY5MSwiZXhwIjoxNzQwNjI5MjkxfQ.a3IMN-69OML3kP5nA7e193_sipuVwuA3E6LxdBMoZu4
+
+###
+
+PUT http://localhost:3003/api/decks/67bfda8bb71f33edd045ed5e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhvbHlydXMiLCJpZCI6IjY3YmZkNzEzZTA4NTVjNGYwMDgzODBiOSIsImlhdCI6MTc0MDYyNTY5MSwiZXhwIjoxNzQwNjI5MjkxfQ.a3IMN-69OML3kP5nA7e193_sipuVwuA3E6LxdBMoZu4
+
+{
+  "natLang": "Japanese"
+}
