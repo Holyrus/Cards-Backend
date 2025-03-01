@@ -1,5 +1,7 @@
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const Deck = require('../models/deck')
+const Card = require('../models/card')
 
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
@@ -23,7 +25,17 @@ usersRouter.get('/', async (request, response) => {
 })
 
 usersRouter.delete('/:id', async (request, response) => {
-  await User.findByIdAndDelete(request.params.id)
+  const userId = request.params.id
+
+  const userDecks = await Deck.find({ user: userId })
+
+  for (const deck of userDecks) {
+    await Card.deleteMany({ deck: deck._id })
+  }
+
+  await Deck.deleteMany({ user: userId })
+
+  await User.findByIdAndDelete(userId)
   response.status(204).end()
 })
 

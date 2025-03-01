@@ -94,6 +94,8 @@ deckRouter.delete('/:id', middleware.userExtractor, async (request, response) =>
   }
 
   if (deck.user.toString() === user.id.toString()) {
+    await Card.deleteMany({ deck: deckId })
+
     await Deck.findByIdAndDelete(deckId)
 
     user.decks = user.decks.filter(deck => deck.toString() !== deckId)

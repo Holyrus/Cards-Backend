@@ -30,7 +30,7 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
 
-// app.use('/api/cards', cardRouter)
+app.use('/api/cards', cardRouter)
 app.use('/api/decks', deckRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)

@@ -18,9 +18,10 @@ const cardSchema = new mongoose.Schema({
     minLength: 1,
     maxLenght: 100,
   },
-  user: {
+  deck: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Deck',
+    required: true
   }
 })
 

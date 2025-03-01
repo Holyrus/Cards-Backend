@@ -5,82 +5,122 @@ const Deck = require('../models/deck')
 const jwt = require('jsonwebtoken')
 const middleware = require('../utils/middleware')
 
-// cardRouter.get('/', async (request, response) => {
-//   const decodedToken = jwt.verify(request.token, process.env.SECRET)
-//   if (!decodedToken.id) {
-//     return response.status(401).json({ error: 'Token Invalid' })
-//   }
-//   const cards = await Card.find({}).populate('user', { username: 1, name: 1 })
-//   response.json(cards)
-// })
+cardRouter.get('/:deckId', middleware.userExtractor, async (request, response) => {
+  const deckId = request.params.deckId
 
-// cardRouter.post('/decks/:id/cards', middleware.userExtractor, async (request, response) => {
-//   const body = request.body
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
-//   const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'Token Invalid' })
+  }
 
-//   if (!decodedToken.id) {
-//     return response.status(401).json({ error: 'Token invalid' })
-//   }
+  const deck = await Deck.findById(deckId)
 
-//   const user = await User.findById(decodedToken.id)
-//   const deck = await Deck.findById(request.params.id)
+  if (!deck) {
+    return response.status(404).json({ error: 'Deck not found' })
+  }
 
-//   if (deck.user.toString() === user.id.toString()) {
-//     deck.cards = deck.cards.concat(body)
-//     await deck.save()
-//     response.status(201).json(deck)
-//   } else {
-//     response.status(401).json({ error: 'Invalid operation' })
-//   }
-// })
+  const cards = await Card.find({ deck: deckId })
+  response.json(cards)
+})
 
-// cardRouter.get('/:id', async (request, response) => {
-//   const card = await Card.findById(request.params.id)
-//   if (card) {
-//     response.json(card)
-//   } else {
-//     response.status(404).end()
-//   }
-// })
+cardRouter.post('/:deckId', middleware.userExtractor, async (request, response) => {
+  const body = request.body
+  const deckId = request.params.deckId
 
-// cardRouter.put('/:id', async (request, response) => {
-//   const body = request.body
+  console.log('Received request with body:', request.body)
+  console.log('Deck ID:', request.params.deckId)
 
-//   const card = {
-//     word: body.word,
-//     translation: body.translation,
-//     usage: body.usage,
-//   }
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
-//   await Card.findByIdAndUpdate(request.params.id, card, {
-//     new: true,
-//     runValidators: true,
-//     context: 'query'
-//   })
-//   response.json(card)
-// })
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'Token invalid' })
+  }
 
-// cardRouter.delete('/:id', middleware.userExtractor, async (request, response) => {
-//   const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  const user = await User.findById(decodedToken.id)
+  const deck = await Deck.findById(deckId)
 
-//   if (!decodedToken.id) {
-//     return response.status(401).json({ error: 'Token invalid' })
-//   }
+  if (!deck) {
+    return response.status(404).json({ error: 'Deck not found' })
+  }
 
-//   const user = await User.findById(decodedToken.id)
-//   const card = await Card.findById(request.params.id)
+  if (deck.user.toString() !== user.id.toString()) {
+    return response.status(401).json({ error: 'Invalid oparation' })
+  }
 
-//   if (card.user.toString() === user.id.toString()) {
-//     await Card.findByIdAndDelete(request.params.id)
-//     user.cards = user.cards.filter(
-//       (c) => c.id.toString() !== request.params.id,
-//     )
-//     await user.save()
-//     response.status(204).end()
-//   } else {
-//     response.status(401).json({ error: 'Invalid operation' })
-//   }
-// })
+  const card = new Card({
+    word: body.word,
+    translation: body.translation,
+    usage: body.usage,
+    deck: deckId
+  })
+
+  const savedCard = await card.save()
+
+  deck.cards = deck.cards.concat(savedCard._id)
+  await deck.save()
+
+  response.status(201).json(savedCard)
+})
+
+cardRouter.put('/:id',middleware.userExtractor, async (request, response) => {
+  const body = request.body
+  const cardId = request.params.id
+
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'Token invalid' })
+  }
+
+  const card = await Card.findById(cardId)
+
+  if (!card) {
+    return response.status(404).json({ error: 'Card not found' })
+  }
+
+  const deck = await Deck.findById(card.deck)
+  const user = await User.findById(decodedToken.id)
+
+  if (deck.user.toString() !== user.id.toString()) {
+    return response.status(401).json({ error: 'Invalid operation' })
+  }
+
+  const updatedCard = await Card.findByIdAndUpdate(cardId, body, {
+    new: true,
+    runValidators: true,
+    context: 'query'
+  })
+
+  response.json(updatedCard)
+})
+
+cardRouter.delete('/:id', middleware.userExtractor, async (request, response) => {
+  const cardId = request.params.id
+
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'Token invalid' })
+  }
+
+  const card = await Card.findById(cardId)
+  if (!card) {
+    return response.status(404).json({ error: 'Card not found' })
+  }
+
+  const deck = await Deck.findById(card.deck)
+  const user = await User.findById(decodedToken.id)
+
+  if (deck.user.toString() !== user.id.toString()) {
+    return response.status(401).json({ error: 'Invalid operation' })
+  }
+
+  deck.cards = deck.cards.filter(c => c.toString() !== cardId.toString())
+  await deck.save()
+
+  await Card.findByIdAndDelete(cardId)
+  response.status(204).end()
+})
 
 module.exports = cardRouter
