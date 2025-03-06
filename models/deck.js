@@ -9,6 +9,14 @@ const deckSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  firstFlag: {
+    type: String,
+    required: true,
+  },
+  secondFlag: {
+    type: String,
+    required: true,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
