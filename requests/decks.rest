@@ -3,9 +3,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJpb25hYXJldGkiLCJpZCI6IjY3YzY0ZWEzNTUxMjA0OTQyMzM4ZTNiMSIsImlhdCI6MTc0MTIyMDE2NSwiZXhwIjoxNzQxMjIzNzY1fQ.U8m25n6NUjVudhsJ_L9CyE_5-DnL5tl7LtMgpsW_zOA
 
 {
-  "learnLang": "Ukraine",
+  "learnLang": "Finnish",
   "natLang": "United Kingdom",
-  "firstFlag": "ua",
+  "firstFlag": "fi",
   "secondFlag": "gb"
 }
 
