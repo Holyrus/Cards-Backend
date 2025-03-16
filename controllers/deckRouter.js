@@ -5,12 +5,16 @@ const Card = require('../models/card')
 const jwt = require('jsonwebtoken')
 const middleware = require('../utils/middleware')
 
-deckRouter.get('/', async (request, response) => {
+deckRouter.get('/', middleware.userExtractor, async (request, response) => {
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
+
   if (!decodedToken.id) {
     return response.status(401).json({ error: 'Token Invalid' })
   }
-  const decks = await Deck.find({}).populate('user', { username: 1, name: 1 })
+
+  const decks = await Deck.find({ user: decodedToken.id })
+    .populate('user', { username: 1, name: 1 })
+
   response.json(decks)
 })
 
