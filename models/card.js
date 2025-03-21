@@ -4,19 +4,19 @@ const cardSchema = new mongoose.Schema({
   word: {
     type: String,
     minLength: 1,
-    maxLenght: 20,
+    maxLength: [60, '60 characters max'],
     required: true,
   },
   translation: {
     type: String,
     minLength: 1,
-    maxLenght: 20,
+    maxLength: [60, '60 characters max'],
     required: true,
   },
   usage: {
     type: String,
     minLength: 1,
-    maxLenght: 100,
+    maxLength: [65, '65 characters max'],
   },
   deck: {
     type: mongoose.Schema.Types.ObjectId,
