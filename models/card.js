@@ -18,6 +18,10 @@ const cardSchema = new mongoose.Schema({
     minLength: 1,
     maxLength: [65, '65 characters max'],
   },
+  img: {
+    type: String,
+    required: true
+  },
   deck: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Deck',
