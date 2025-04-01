@@ -20,7 +20,7 @@ deckRouter.get('/', middleware.userExtractor, async (request, response) => {
 })
 
 deckRouter.post('/', middleware.userExtractor, async (request, response) => {
-  const { learnLang, natLang, firstFlag, secondFlag, mainDeck } = request.body
+  const { learnLang, natLang, firstFlag, secondFlag, mainDeck, voice } = request.body
 
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
@@ -41,6 +41,7 @@ deckRouter.post('/', middleware.userExtractor, async (request, response) => {
     firstFlag,
     secondFlag,
     mainDeck,
+    voice,
     user: user._id,
   })
 
@@ -72,6 +73,7 @@ deckRouter.put('/:id', middleware.userExtractor, async (request, response) => {
       natLang: body.natLang,
       secondFlag: body.secondFlag,
       mainDeck: body.mainDeck,
+      voice: body.voice,
     }
 
     await Deck.findByIdAndUpdate(deckId, updatedDeck, {
@@ -80,7 +82,7 @@ deckRouter.put('/:id', middleware.userExtractor, async (request, response) => {
       context: 'query'
     })
 
-    const updatedUser = await User.findById(decodedToken.id).populate('decks', { learnLang: 1, natLang: 1, mainDeck: 1 })
+    const updatedUser = await User.findById(decodedToken.id).populate('decks', { learnLang: 1, natLang: 1, mainDeck: 1, voice: 1 })
 
     response.json(updatedUser)
   } else {
