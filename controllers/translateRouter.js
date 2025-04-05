@@ -1,38 +1,24 @@
-require('dotenv').config()
 const translateRouter = require('express').Router()
 const axios = require('axios')
 
-translateRouter.post('/', async (request, response) => {
-  const { text, targetLanguage} = request.body
+// docker run -p 5000:5000 libretranslate/libretranslate
 
-  if (!text || !targetLanguage) {
-    return response.status(400).json({
-      error: 'Text and target language are required',
-    })
-  }
+translateRouter.post('/', async (req, res) => {
+  const { q, source, target, format } = req.body
 
   try {
-    const apiResponse = await axios.post(
-      'https://libretranslate.de/translate',
-      {
-        q: text,
-        source: 'auto',
-        target: targetLanguage,
-        format: 'text'
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+    const response = await axios.post('http://localhost:5000/translate', {
+      q,
+      source,
+      target,
+      format: format || 'text'
+    })
 
-    return response.json({ translatedText: apiResponse.data.translatedText })
+    res.json(response.data)
   } catch (error) {
-    console.error('Translation error:', error.response?.data || error.message)
-    return response.status(500).json({ error: 'Translation failed. Try again later.' })
+    console.error('Error during translation:', error.message)
+    res.status(500).json({ error: 'Translation failed' })
   }
-
 })
 
 module.exports = translateRouter

@@ -1,0 +1,13 @@
+POST http://localhost:3003/api/translate
+Content-Type: application/json
+
+{
+  "q": "Hello world",
+  "source": "en",
+  "target": "ru"
+}
+
+###
+
+# docker run -p 5000:5000 libretranslate/libretranslate
+
