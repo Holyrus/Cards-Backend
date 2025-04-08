@@ -22,6 +22,22 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  toLearn: {
+    type: Boolean,
+    default: true
+  },
+  known: {
+    type: Boolean,
+    default: false
+  },
+  learned: {
+    type: Boolean,
+    default: false
+  },
+  gotIt: {
+    type: Number,
+    default: 0
+  },
   deck: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Deck',

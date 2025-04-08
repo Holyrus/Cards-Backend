@@ -14,7 +14,7 @@ deckRouter.get('/', middleware.userExtractor, async (request, response) => {
 
   const decks = await Deck.find({ user: decodedToken.id })
     .populate('user', { username: 1, name: 1 })
-    .populate('cards', { word: 1, translation: 1, usage: 1, img: 1 })
+    .populate('cards', { word: 1, translation: 1, usage: 1, img: 1, toLearn: 1, known: 1, learned: 1, gotIt: 1 })
 
   response.json(decks)
 })

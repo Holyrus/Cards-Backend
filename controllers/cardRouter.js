@@ -53,6 +53,10 @@ cardRouter.post('/:deckId', middleware.userExtractor, async (request, response) 
     translation: body.translation,
     usage: body.usage,
     img: body.img,
+    toLearn: body.toLearn,
+    known: body.known,
+    learned: body.learned,
+    gotIt: body.gotIt,
     deck: deckId
   })
 
