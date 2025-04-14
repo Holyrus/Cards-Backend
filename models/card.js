@@ -38,6 +38,10 @@ const cardSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  flipped: {
+    type: Boolean,
+    default: false
+  },
   deck: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Deck',

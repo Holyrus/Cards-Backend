@@ -57,6 +57,7 @@ cardRouter.post('/:deckId', middleware.userExtractor, async (request, response) 
     known: body.known,
     learned: body.learned,
     gotIt: body.gotIt,
+    flipped: body.flipped,
     deck: deckId
   })
 
