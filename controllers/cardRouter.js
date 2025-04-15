@@ -4,6 +4,7 @@ const User = require('../models/user')
 const Deck = require('../models/deck')
 const jwt = require('jsonwebtoken')
 const middleware = require('../utils/middleware')
+const schedule = require('node-schedule')
 
 cardRouter.get('/:deckId', middleware.userExtractor, async (request, response) => {
   const deckId = request.params.deckId
@@ -58,6 +59,7 @@ cardRouter.post('/:deckId', middleware.userExtractor, async (request, response) 
     learned: body.learned,
     gotIt: body.gotIt,
     flipped: body.flipped,
+    nextReviewDate: body.nextReviewDate,
     deck: deckId
   })
 
@@ -69,7 +71,7 @@ cardRouter.post('/:deckId', middleware.userExtractor, async (request, response) 
   response.status(201).json(savedCard)
 })
 
-cardRouter.put('/:id',middleware.userExtractor, async (request, response) => {
+cardRouter.put('/:id', middleware.userExtractor, async (request, response) => {
   const body = request.body
   const cardId = request.params.id
 
