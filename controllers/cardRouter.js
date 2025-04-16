@@ -4,7 +4,6 @@ const User = require('../models/user')
 const Deck = require('../models/deck')
 const jwt = require('jsonwebtoken')
 const middleware = require('../utils/middleware')
-const schedule = require('node-schedule')
 
 cardRouter.get('/:deckId', middleware.userExtractor, async (request, response) => {
   const deckId = request.params.deckId

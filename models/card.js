@@ -43,7 +43,7 @@ const cardSchema = new mongoose.Schema({
     default: false
   },
   nextReviewDate: {
-    type: Date,
+    type: String,
     default: null,
   },
   deck: {
@@ -53,13 +53,7 @@ const cardSchema = new mongoose.Schema({
   }
 })
 
-cardSchema.virtual('timeRemaining').get(function () {
-  if (!this.nextReviewDate) return null
-  return this.nextReviewDate.getTime() - Date.now()
-})
-
 cardSchema.set('toJSON', {
-  virtuals: true,
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
