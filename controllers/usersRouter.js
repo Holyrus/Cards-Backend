@@ -24,6 +24,14 @@ usersRouter.get('/', async (request, response) => {
   response.json(users)
 })
 
+usersRouter.get('/:id', async (request, response) => {
+  const userId = request.params.id
+
+  const userToFind = await User.findById(userId)
+
+  response.json(userToFind)
+})
+
 usersRouter.delete('/:id', async (request, response) => {
   const userId = request.params.id
 
