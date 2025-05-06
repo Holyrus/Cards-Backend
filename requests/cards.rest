@@ -3,14 +3,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJpb
 
 ###
 
-POST http://localhost:3003/api/cards/67c650c9551204942338e3b9
+POST http://localhost:3003/api/cards/67fd9653516490a763923ada
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJpb25hYXJldGkiLCJpZCI6IjY3YzY0ZWEzNTUxMjA0OTQyMzM4ZTNiMSIsImlhdCI6MTc0MTA0OTUzOSwiZXhwIjoxNzQxMDUzMTM5fQ.93p_Mb2sKjA6xvFWbPPfIRmBXJTb0NzfzZ72EYy3VJU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJpb25hYXJldGkiLCJpZCI6IjY3ZDIzN2QxZjE5OTI3MjNhMTFjMjdkZSIsImlhdCI6MTc0NjQ4ODY2MH0.zSQ25oJIqNbW3wQ4JoiPTIZeJtG2R2R9OIq3Av38F5c
 
 {
   "word": "Dog",
   "translation": "Собака",
-  "usage": "This is my dog, Rex"
+  "usage": "This is my dog, Rex",
+  "img": "first-quarter-moon-e10q28u73976q7oyagnhr6.png"
 }
 
 ###
